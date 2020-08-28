@@ -530,16 +530,14 @@ open class LineChartRenderer: LineRadarRenderer
 
         if isDrawingValuesAllowed(dataProvider: dataProvider)
         {
-            let dataSets = lineData.dataSets
-            
             let phaseY = animator.phaseY
             
             var pt = CGPoint()
             
-            for i in 0 ..< dataSets.count
+            for i in lineData.indices
             {
                 guard let
-                    dataSet = dataSets[i] as? LineChartDataSetProtocol,
+                    dataSet = lineData[i] as? LineChartDataSetProtocol,
                     shouldDrawValues(forDataSet: dataSet)
                     else { continue }
                 
@@ -621,8 +619,6 @@ open class LineChartRenderer: LineRadarRenderer
             else { return }
         
         let phaseY = animator.phaseY
-
-        let dataSets = lineData.dataSets
         
         var pt = CGPoint()
         var rect = CGRect()
@@ -641,7 +637,7 @@ open class LineChartRenderer: LineRadarRenderer
 
         context.saveGState()
 
-        for i in 0 ..< dataSets.count
+        for i in lineData.indices
         {
             guard let dataSet = lineData[i] as? LineChartDataSetProtocol else { continue }
 
